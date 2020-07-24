@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.Experimental.XR;
+using UnityEngine.Experimental.XR; // is this still needed? test
 using UnityEngine.XR.ARSubsystems;
 
 //using System;
@@ -11,8 +11,10 @@ public class ARTapToPlaceObject : MonoBehaviour
 {
     public GameObject objectToPlace;
     public GameObject placementIndicator;
-
-    private ARRaycastManager arOrigin; // Raycast
+    
+// ARRaycastManager replaces ARSessionOrigin
+// also needs the AR Raycast Manager component addedd to AR Session Origin
+    private ARRaycastManager arOrigin; 
     private Pose placementPose;
     private bool placementPoseIsValid = false;
 
