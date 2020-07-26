@@ -142,7 +142,7 @@ namespace ARFoundationSamples
 
         void OnEnable()
         {
-            m_LogText.text = "";
+            
             StartCoroutine(CheckSupport());
         }
     }
