@@ -633,7 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b2e7c22494424549bed4b3f481585dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToPlace: {fileID: 6599071579922241991, guid: 9a03592e5cbd5423f9f0e886fed9a77b,
+  objectToPlace: {fileID: 7016411721382644989, guid: c54a0e49709e44e19a3dc72c6b2904bf,
     type: 3}
   placementIndicator: {fileID: 1475554209}
 --- !u!4 &1405079139
@@ -694,9 +694,10 @@ GameObject:
   - component: {fileID: 1658164754}
   - component: {fileID: 1658164753}
   - component: {fileID: 1658164752}
+  - component: {fileID: 1658164756}
   m_Layer: 0
   m_Name: AR Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -726,7 +727,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 20
-  field of view: 60
+  field of view: 26.991467
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -787,11 +788,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Device: 0
-  m_PoseSource: 6
+  m_PoseSource: 2
   m_PoseProviderComponent: {fileID: 0}
   m_TrackingType: 0
   m_UpdateType: 0
-  m_UseRelativeTransform: 0
+  m_UseRelativeTransform: 1
 --- !u!4 &1658164755
 Transform:
   m_ObjectHideFlags: 0
@@ -806,6 +807,14 @@ Transform:
   m_Father: {fileID: 385947864}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &1658164756
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658164750}
+  m_Enabled: 1
 --- !u!1 &1892341432
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +826,7 @@ GameObject:
   - component: {fileID: 1892341433}
   - component: {fileID: 1892341435}
   - component: {fileID: 1892341434}
+  - component: {fileID: 1892341436}
   m_Layer: 5
   m_Name: DEBUG
   m_TagString: Untagged
@@ -856,7 +866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.990566, g: 0.53198934, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -864,14 +874,14 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_FontSize: 24
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
@@ -888,3 +898,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892341432}
   m_CullTransparentMesh: 0
+--- !u!114 &1892341436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892341432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 309537a01a334411ca4e943a8eba2be6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugMessages: 1

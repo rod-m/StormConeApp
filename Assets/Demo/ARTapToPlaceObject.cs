@@ -17,7 +17,8 @@ public class ARTapToPlaceObject : MonoBehaviour
     private ARRaycastManager arOrigin; 
     private Pose placementPose;
     private bool placementPoseIsValid = false;
-
+    private GameObject singleObjecct = null; 
+    private bool placedSingleObjecct = false;
     void Start()
     {
         arOrigin = FindObjectOfType<ARRaycastManager>();
@@ -36,7 +37,16 @@ public class ARTapToPlaceObject : MonoBehaviour
 
     private void PlaceObject()
     {
-        Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
+        if (placedSingleObjecct)
+        {
+            singleObjecct.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
+        }
+        else
+        {
+            placedSingleObjecct = true;
+            singleObjecct = Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
+        }
+        
     }
 
     private void UpdatePlacementIndicator()
