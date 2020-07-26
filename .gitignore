@@ -71,3 +71,13 @@ crashlytics-build.properties
 
 # ios
 .DS_Store
+
+# dont add music files to git
+*.wav
+*.mp3
+*.ogg
+*.aif
+*.xm
+*.mod
+*.it
+*.s3m
