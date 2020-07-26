@@ -7,24 +7,24 @@ public class DebugCanvaser : MonoBehaviour
 {
     // Start is called before the first frame update
     private Transform watchCam;
-    private Text debugText;
+    public Text debugText;
     public bool debugMessages = true;
     void Start()
     {
         watchCam = Camera.current.transform;
-        debugText = GetComponent<Text>();
+        //debugText = gameObject.GetComponent<Text>();
         if (debugMessages)
         {
             if (debugText == null)
             {
                 debugMessages = false;
-                debugText.text = "No Text Canvas";
+                return;
             }
             else
             {
                 debugText.text = "Start Debug";
             }
-            if (watchCam == null)
+            if (watchCam == null && debugMessages)
             {
                 debugMessages = false;
                 debugText.text = "No Camera";
@@ -36,7 +36,9 @@ public class DebugCanvaser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        debugText.text = "X: " + watchCam.position.x + " Z: " + watchCam.position.z;
+        if (debugMessages)
+        {
+           // debugText.text = "X: " + watchCam.position.x + " Z: " + watchCam.position.z;
+        }
     }
 }
