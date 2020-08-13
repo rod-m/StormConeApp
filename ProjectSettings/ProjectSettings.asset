@@ -122,9 +122,7 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 0.1
-  preloadedAssets:
-  - {fileID: -4278791843262105906, guid: 317966c690e914741b65ddda3747722b, type: 2}
-  - {fileID: 11400000, guid: 4b161c53ddb0941ce8d0d0cf11e494dd, type: 2}
+  preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -168,7 +166,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: uk.ac.salford.team
-    iPhone: uk.ac.salford.team
+    iPhone: uk.ac.salford.StormCone
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 24
