@@ -2,13 +2,25 @@ using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Android;
 namespace GPSLocation
 {
     public class TestLocationService : MonoBehaviour
     {
         [SerializeField]
         Text m_LocationText;
-
+        [SerializeField]
+        Button m_StartGPSButton;
+        public Button startGPSButton
+        {
+            get { return m_StartGPSButton; }
+            set { m_StartGPSButton = value; }
+        }
+        void SetStartGPSButtonActive(bool active)
+        {
+            if (m_StartGPSButton != null)
+                m_StartGPSButton.gameObject.SetActive(active);
+        }
         public Text locationText
         {
             get { return m_LocationText; }
@@ -31,10 +43,16 @@ namespace GPSLocation
 
         IEnumerator CheckGPSSupport()
         {
+            m_LogText.text = "Starting GPS";
             // First, check if user has location service enabled
             if (!Input.location.isEnabledByUser)
             {
-                Log("\nGPS Not Enabled!");
+                m_LogText.text = "*** GPS Not Enabled By USER! ***";
+                
+                yield return new WaitForSeconds(3);
+                m_LocationText.text = "NO GPS";
+                m_LogText.text = "";
+                
                 yield break;
             }
               
@@ -46,6 +64,8 @@ namespace GPSLocation
             int maxWait = 20;
             while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
             {
+                Debug.Log("Waiting " + maxWait);
+                m_LocationText.text = "Waiting... " + maxWait;
                 yield return new WaitForSeconds(1);
                 maxWait--;
             }
@@ -54,6 +74,7 @@ namespace GPSLocation
             if (maxWait < 1)
             {
                 Log("\nTimed out");
+                m_LocationText.text = "GSP Timeout 20s!";
                 yield break;
             }
 
@@ -61,6 +82,7 @@ namespace GPSLocation
             if (Input.location.status == LocationServiceStatus.Failed)
             {
                 Log("\nUnable to determine device location");
+                m_LocationText.text = "Unable to determine device location";
                 yield break;
             }
             else
@@ -85,12 +107,33 @@ namespace GPSLocation
                 yield return new WaitForSeconds(1);
             }
         }
-
+        
+        public void StartGPS()
+        {
+            SetStartGPSButtonActive(false);
+           
+            StartCoroutine(CheckGPSSupport());
+        }
+        public void StopGPS()
+        {
+            SetStartGPSButtonActive(true);
+            StopCoroutine(CheckGPSSupport());
+        }
+        
         void OnEnable()
         {
            
-                //Log("\nGPS Available?");
-                StartCoroutine(CheckGPSSupport());
+            if (Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+            {
+                // The user authorized use of the FineLocation.
+            }
+            else
+            {
+                // We do not have permission to use the FineLocation.
+                // Ask for permission or proceed without the functionality enabled.
+                Permission.RequestUserPermission(Permission.FineLocation);
+            }
+                //
             
         }
     }

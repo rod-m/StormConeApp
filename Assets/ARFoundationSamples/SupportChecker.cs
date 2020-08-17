@@ -15,6 +15,10 @@ namespace ARFoundationSamples
     /// </summary>
     public class SupportChecker : MonoBehaviour
     {
+        
+        //ARInputManager m_arInput;
+
+      
         [SerializeField]
         ARSession m_Session;
 
@@ -39,6 +43,13 @@ namespace ARFoundationSamples
         [SerializeField]
         GameObject m_ARInteraction;
         
+        [SerializeField]
+        Button m_StartButton;
+        public Button startButton
+        {
+            get { return m_StartButton; }
+            set { m_StartButton = value; }
+        }
         public GameObject ARInteraction
         {
             get { return m_ARInteraction; }
@@ -77,6 +88,7 @@ namespace ARFoundationSamples
 
                 // To start the ARSession, we just need to enable it.
                 m_Session.enabled = true;
+                //m_arInput.enabled = true;
             }
             else
             {
@@ -108,7 +120,11 @@ namespace ARFoundationSamples
             if (m_InstallButton != null)
                 m_InstallButton.gameObject.SetActive(active);
         }
-
+        void SetStartButtonActive(bool active)
+        {
+            if (m_StartButton != null)
+                m_StartButton.gameObject.SetActive(active);
+        }
         IEnumerator Install()
         {
             SetInstallButtonActive(false);
@@ -126,7 +142,9 @@ namespace ARFoundationSamples
                 else if (ARSession.state == ARSessionState.Ready)
                 {
                     Log("Success! Starting AR session...");
+                    //m_arInput.enabled = true;
                     m_Session.enabled = true;
+                    
                 }
             }
             else
@@ -137,13 +155,21 @@ namespace ARFoundationSamples
 
         public void OnInstallButtonPressed()
         {
+           
             StartCoroutine(Install());
         }
-
+        public void OnStartButtonPressed()
+        {
+            StartCoroutine(CheckSupport());
+            SetStartButtonActive(false);
+        }
         void OnEnable()
         {
-            
-            StartCoroutine(CheckSupport());
+            //m_arInput = GetComponent<ARInputManager>();
+            //m_arInput.enabled = false;
+            SetInstallButtonActive(false);
+            SetStartButtonActive(true);
+
         }
     }
 }

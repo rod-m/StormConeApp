@@ -19,6 +19,7 @@ public class ARTapToPlaceObject : MonoBehaviour
     private bool placementPoseIsValid = false;
     private GameObject singleObjecct = null; 
     private bool placedSingleObjecct = false;
+    private bool allowPlacement = true;
     void Start()
     {
         arOrigin = FindObjectOfType<ARRaycastManager>();
@@ -26,6 +27,7 @@ public class ARTapToPlaceObject : MonoBehaviour
 
     void Update()
     {
+        if(!allowPlacement) return;
         UpdatePlacementPose();
         UpdatePlacementIndicator();
 
@@ -64,7 +66,7 @@ public class ARTapToPlaceObject : MonoBehaviour
 
     private void UpdatePlacementPose()
     {
-   
+        if (Camera.current == null) return;
         var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
         var hits = new List<ARRaycastHit>();
         arOrigin.Raycast(screenCenter, hits, TrackableType.Planes);
