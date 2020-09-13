@@ -73,6 +73,7 @@ crashlytics-build.properties
 .DS_Store
 
 # dont add music files to git
+*.wav.meta
 *.wav
 *.mp3
 *.ogg
