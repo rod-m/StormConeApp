@@ -79,9 +79,9 @@ public class PlayerController : MonoBehaviour
     void DoCompass()
     {
         log = $"POS: {posMove.ToString()} \n";
-        deg = -Input.compass.trueHeading;
+        deg = Input.compass.trueHeading;
         deg = Mathf.Round(deg);
-        log += $"deg: {(360 - deg)}";
+        log += $"deg: {(deg)}";
         if (miniCamFound)
         {
             miniCam.transform.rotation = Quaternion.Euler(90, deg, 0);
