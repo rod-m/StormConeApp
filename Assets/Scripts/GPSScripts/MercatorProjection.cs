@@ -1,3 +1,8 @@
+
+/*
+ * https://wiki.openstreetmap.org/wiki/Mercator#C.23
+ */
+
 using System;
 
 namespace MapTools
