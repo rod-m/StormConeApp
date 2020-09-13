@@ -5,12 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Scenes/ARStartScene.unity
-    guid: c90cf2c21179c4b8a8262348f353ddfe
   - enabled: 1
     path: Assets/Scenes/App Scenes/Splash Screen.unity
     guid: 33881809c9cecc646b3c03bc0d8e98dd
@@ -32,6 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/App Scenes/Map View.unity
     guid: f42b5ec09e1dee6428c27cbbb7c5c0cd
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/ARStartScene.unity
+    guid: c90cf2c21179c4b8a8262348f353ddfe
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/MainGPSScene.unity
+    guid: 4fdba0c7285ef4b889e04de86d347b6b
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 4b161c53ddb0941ce8d0d0cf11e494dd,
       type: 2}
