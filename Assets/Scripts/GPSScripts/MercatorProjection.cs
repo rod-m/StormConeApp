@@ -67,12 +67,12 @@ namespace MapTools
             return RadToDeg(phi);
         }
 
-        private static double RadToDeg(double rad)
+        public static double RadToDeg(double rad)
         {
             return rad * RAD2Deg;
         }
 
-        private static double DegToRad(double deg)
+        public static double DegToRad(double deg)
         {
             return deg * DEG2RAD;
         }

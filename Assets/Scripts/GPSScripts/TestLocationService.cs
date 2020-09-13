@@ -10,6 +10,9 @@ public class TestLocationService : MonoBehaviour
     Text m_LocationText;
     [SerializeField]
     Button m_StartGPSButton;
+    [SerializeField]
+    Button m_PlaceAgainButton;
+
 
 
     public float GPSX;
@@ -18,7 +21,7 @@ public class TestLocationService : MonoBehaviour
     public bool test;
     public GameObject player;
     public GameObject soundSource;
-
+    private List<GameObject> placeObjects = new List<GameObject>();
     private void Start()
     {
         GPSX = 0;
@@ -35,6 +38,12 @@ public class TestLocationService : MonoBehaviour
     {
         if (m_StartGPSButton != null)
             m_StartGPSButton.gameObject.SetActive(active);
+    }
+    
+    void SetPlaceAgainActive(bool active)
+    {
+        if (m_PlaceAgainButton != null)
+            m_PlaceAgainButton.gameObject.SetActive(active);
     }
     public Text locationText
     {
@@ -109,27 +118,46 @@ public class TestLocationService : MonoBehaviour
         // Stop service if there is no need to query location updates continuously
 
         // Input.location.Stop();
+         
         StartCoroutine(CheckGPS());
     }
 
+    public void PlaceAgain()
+    {
+        test = true;
+    }
     IEnumerator CheckGPS()
     {
         while (true)
         {
             if (test)
             {
+                if (placeObjects.Count > 0)
+                {
+                    foreach (var gm in placeObjects)
+                    {
+                        Destroy(gm);
+                    }
+                    placeObjects.Clear();
+                }
+                SetPlaceAgainActive(false);
                 m_LocationText.text = "Adding Location Marker";
                 yield return new WaitForSeconds(3f);
-                Instantiate(soundSource);
-                Instantiate(player);
+                var g = Instantiate(soundSource);
+                placeObjects.Add(g);
+                g = Instantiate(player);
+                player.SetActive(false);
+                soundSource.SetActive(false);
+                placeObjects.Add(g);
                 test = false;
                 m_LocationText.text = $"Added Location Marker {Input.location.lastData.latitude} {Input.location.lastData.longitude}";
                                       
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(2f);
+                SetPlaceAgainActive(true);
             }
             GPSX = Input.location.lastData.latitude;
             GPSZ = Input.location.lastData.longitude;
-            m_LocationText.text = $"Location: {Input.location.lastData.latitude} { Input.location.lastData.longitude}";
+            m_LocationText.text = $"Lon: {GPSZ} Lat: {GPSX}\n Accuracy: {Input.location.lastData.horizontalAccuracy}";
                                  
             //              " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy;
             yield return new WaitForSeconds(0.5f);
@@ -138,6 +166,7 @@ public class TestLocationService : MonoBehaviour
 
     public void StartGPS()
     {
+        // allow me to place again without force close app
         SetStartGPSButtonActive(false);
 
         StartCoroutine(CheckGPSSupport());
@@ -155,7 +184,7 @@ public class TestLocationService : MonoBehaviour
 
     void OnEnable()
     {
-
+        SetPlaceAgainActive(false);
         if (Permission.HasUserAuthorizedPermission(Permission.FineLocation))
         {
             // The user authorized use of the FineLocation.
@@ -166,6 +195,7 @@ public class TestLocationService : MonoBehaviour
             // Ask for permission or proceed without the functionality enabled.
             Permission.RequestUserPermission(Permission.FineLocation);
         }
+        
         //
 
     }
