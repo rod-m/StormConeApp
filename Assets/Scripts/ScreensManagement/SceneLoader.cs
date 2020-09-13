@@ -40,6 +40,11 @@ namespace ScreensManagement
             SceneManager.LoadScene("Main Menu");
         }
 
+        public void OpenSceneByName(string sceneName)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+
         public void GoToInfo()
         {
             SceneManager.LoadScene("Info Page");
