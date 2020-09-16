@@ -138,6 +138,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2291710140e45858345aba395ddb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GPSX: 0
-  GPSZ: 0
-  orthoSize: 30
+  canvasmanager: {fileID: 0}
+  orthoSize: 20
