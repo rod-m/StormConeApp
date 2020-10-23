@@ -35,34 +35,10 @@ namespace ScreensManagement
             SceneManager.LoadScene("Welcome Screens");
         }
 
-        public void GoToMainMenu()
-        {
-            SceneManager.LoadScene("Main Menu");
-        }
 
-        public void OpenSceneByName(string sceneName)
+        public void SwitchScene(String sceneName) 
         {
             SceneManager.LoadScene(sceneName);
-        }
-
-        public void GoToInfo()
-        {
-            SceneManager.LoadScene("Info Page");
-        }
-
-        public void GoToLibrary()
-        {
-            SceneManager.LoadScene("Playlist");
-        }
-
-        public void StartExperienceSlides()
-        {
-            SceneManager.LoadScene("Pre-Experience Screen");
-        }
-
-        public void StartExperience()
-        {
-            SceneManager.LoadScene("Map View");
         }
     }
 }
