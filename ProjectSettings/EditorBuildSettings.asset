@@ -5,28 +5,28 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/App Scenes/Splash Screen.unity
     guid: 33881809c9cecc646b3c03bc0d8e98dd
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/App Scenes/Welcome Screens.unity
     guid: b70ecb34f08c5194bb15799df6ada3b7
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/App Scenes/Main Menu.unity
     guid: ea2bc2663792dff48a8a31599d5a7e30
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/App Scenes/Pre-Experience Screen.unity
     guid: 05fd5d8a518e27445a89751a25325f3d
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/App Scenes/Playlist.unity
     guid: 7f713f1dde26b87418fff2c51ac63e71
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/App Scenes/Info Page.unity
     guid: 7dbe5bba6a077484880d9885c0ffa123
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/App Scenes/Map View.unity
     guid: f42b5ec09e1dee6428c27cbbb7c5c0cd
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/TestScenes/ARStartScene.unity
     guid: c90cf2c21179c4b8a8262348f353ddfe
   - enabled: 1

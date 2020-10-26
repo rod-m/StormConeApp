@@ -223,6 +223,87 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &332936430
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3352510701019399977, guid: 98adc46562f414114be9bc1244bb41e8,
+        type: 3}
+      propertyPath: m_Name
+      value: SceneLoader
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352510701019399979, guid: 98adc46562f414114be9bc1244bb41e8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 822.0015
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352510701019399979, guid: 98adc46562f414114be9bc1244bb41e8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1475.0919
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352510701019399979, guid: 98adc46562f414114be9bc1244bb41e8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -75.54042
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352510701019399979, guid: 98adc46562f414114be9bc1244bb41e8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352510701019399979, guid: 98adc46562f414114be9bc1244bb41e8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352510701019399979, guid: 98adc46562f414114be9bc1244bb41e8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352510701019399979, guid: 98adc46562f414114be9bc1244bb41e8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352510701019399979, guid: 98adc46562f414114be9bc1244bb41e8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352510701019399979, guid: 98adc46562f414114be9bc1244bb41e8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352510701019399979, guid: 98adc46562f414114be9bc1244bb41e8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352510701019399979, guid: 98adc46562f414114be9bc1244bb41e8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 98adc46562f414114be9bc1244bb41e8, type: 3}
+--- !u!114 &332936431 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3352510701019399976, guid: 98adc46562f414114be9bc1244bb41e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 332936430}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f7ab04faa4017c469ff5dc633d15441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &482168882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1523,7 +1604,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1702737064
 MonoBehaviour:
@@ -1631,7 +1712,7 @@ Transform:
   m_Children:
   - {fileID: 1067471534205585241}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!169 &1067471533108649637
 AudioLowPassFilter:
@@ -1893,7 +1974,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 332936431}
     - target: {fileID: 296381344781838115, guid: 7cc3de9b08e2b4e3a8f8fdc2b702cea3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
