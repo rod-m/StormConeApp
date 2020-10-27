@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Mapbox.Unity.Map;
 using UnityEngine;
 
 public class MapCameraPanning : MonoBehaviour
@@ -17,15 +18,25 @@ public class MapCameraPanning : MonoBehaviour
     private Vector2 curDist = new Vector2(0,0); 
     private float speedTouch0 = 0.0F; 
     private float speedTouch1 = 0.0F;
-    
 
+    private AbstractMap map;
+    private float zoom = 10;
+    
     void Start()
     {
         camera = FindObjectOfType<Camera>();
         Input.multiTouchEnabled = true;
+        map = FindObjectOfType<AbstractMap>();
+        map.SetZoom(zoom);
+        
+        //Get park location
+        
+        //position the camera at the park coordinates
+        
+        //zoom map on park 
+        ZoomMap();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         PinchZoom();
@@ -50,4 +61,20 @@ public class MapCameraPanning : MonoBehaviour
             }
         }
     }
+    
+    //Camera positioning
+
+    private void ZoomMap()
+    {
+        while (zoom < 16)
+        {
+            zoom++;
+            map.SetZoom(zoom);
+            
+        }
+    }
+ 
+    //Salford parks origin: 53.488097, -2.270823
+    
+    
 }
