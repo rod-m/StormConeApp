@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using Mapbox.Unity.Utilities;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 
@@ -12,7 +13,6 @@ namespace ScreensManagement
         private Vector3 panelLocation;
         private float percentThreshold = 0.2f;
         public float easing = 0.5f;
-
         private void Start()
         {
             panelLocation = transform.position;
@@ -28,7 +28,7 @@ namespace ScreensManagement
         public void OnEndDrag(PointerEventData eventData)
         {
             float percentages = (eventData.pressPosition.x - eventData.position.x) / Screen.width;
-     
+
             if (Mathf.Abs(percentages) >= percentThreshold)
             {
                 Vector3 newLocation = panelLocation;
@@ -40,9 +40,9 @@ namespace ScreensManagement
                 {
                     newLocation += new Vector3(Screen.width, 0, 0);
                 }
-
-                StartCoroutine(SmoothMove(transform.position, newLocation, easing));
-                panelLocation = newLocation;
+                
+                    StartCoroutine(SmoothMove(transform.position, newLocation, easing));
+                    panelLocation = newLocation;
             }
             else
             {

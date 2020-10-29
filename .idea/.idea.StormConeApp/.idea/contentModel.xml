@@ -616,6 +616,7 @@
           <e p="Locations.cs" t="Include" />
           <e p="MapCameraPanning.cs" t="Include" />
           <e p="MapSelector.cs" t="Include" />
+          <e p="ParkInfoToggle.cs" t="Include" />
           <e p="ScreensManagement" t="Include">
             <e p="PageSlider.cs" t="Include" />
             <e p="SceneLoader.cs" t="Include" />
