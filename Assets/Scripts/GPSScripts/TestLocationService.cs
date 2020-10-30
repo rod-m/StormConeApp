@@ -4,24 +4,29 @@ using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Canvasmanager))]
 public class TestLocationService : MonoBehaviour
 {
-    [SerializeField]
-    Text m_LocationText;
+
     [SerializeField]
     Button m_StartGPSButton;
+    [SerializeField]
+    Button m_PlaceAgainButton;
 
 
-    public float GPSX;
-    public float GPSZ;
+    private Canvasmanager canvasmanager;
+
+    private float GPSX;
+    private float GPSZ;
 
     public bool test;
     public GameObject player;
-
+    public GameObject soundSource;
+    private List<GameObject> placeObjects = new List<GameObject>();
     private void Start()
     {
-        GPSX = 0;
-        GPSZ = 0;
+        canvasmanager = GetComponent<Canvasmanager>();
+
     }
 
 
@@ -35,51 +40,40 @@ public class TestLocationService : MonoBehaviour
         if (m_StartGPSButton != null)
             m_StartGPSButton.gameObject.SetActive(active);
     }
-    public Text locationText
+    
+    void SetPlaceAgainActive(bool active)
     {
-        get { return m_LocationText; }
-        set { m_LocationText = value; }
+        if (m_PlaceAgainButton != null)
+            m_PlaceAgainButton.gameObject.SetActive(active);
     }
 
-    [SerializeField]
-    Text m_LogText;
-
-    public Text logText
-    {
-        get { return m_LogText; }
-        set { m_LogText = value; }
-    }
-
-    void Log(string message)
-    {
-        m_LogText.text += $"{message}\n";
-    }
+    
 
     IEnumerator CheckGPSSupport()
     {
-        m_LogText.text = "Starting GPS";
+        canvasmanager.m_LogText.text = "Init GPS!";
         // First, check if user has location service enabled
         if (!Input.location.isEnabledByUser)
         {
-            m_LogText.text = "*** GPS Not Enabled By USER! ***";
-
+        
+            canvasmanager.Log("*** GPS Not Enabled By USER! ***");
             yield return new WaitForSeconds(3);
-            m_LocationText.text = "NO GPS";
-            m_LogText.text = "";
+            canvasmanager.m_LocationText.text = "NO GPS";
+            canvasmanager.m_LogText.text = "";
 
             yield break;
         }
 
 
         // Start service before querying location
-        Input.location.Start(1, 1);
+        Input.location.Start(2, 2);
 
         // Wait until service initializes
         int maxWait = 20;
         while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
         {
-            Debug.Log("Waiting " + maxWait);
-            m_LocationText.text = "Waiting... " + maxWait;
+            //Debug.Log("Waiting " + maxWait);
+            canvasmanager.m_LocationText.text = "Waiting... " + maxWait;
             yield return new WaitForSeconds(1);
             maxWait--;
         }
@@ -87,51 +81,76 @@ public class TestLocationService : MonoBehaviour
         // Service didn't initialize in 20 seconds
         if (maxWait < 1)
         {
-            Log("\nTimed out");
-            m_LocationText.text = "GSP Timeout 20s!";
+            canvasmanager.Log("Timed out");
+            canvasmanager.m_LocationText.text = "GSP Timeout 20s!";
             yield break;
         }
 
         // Connection has failed
         if (Input.location.status == LocationServiceStatus.Failed)
         {
-            Log("\nUnable to determine device location");
-            m_LocationText.text = "Unable to determine device location";
+            canvasmanager.Log("Unable to determine device location");
+            canvasmanager.m_LocationText.text = "Unable to determine device location";
             yield break;
         }
         else
         {
             // Access granted and location value could be retrieved
-            Log("\nLocation: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp);
+            canvasmanager.Log( Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp);
         }
 
         // Stop service if there is no need to query location updates continuously
 
         // Input.location.Stop();
+        Input.compass.enabled = true;
         StartCoroutine(CheckGPS());
     }
 
+    public void PlaceAgain()
+    {
+        test = true;
+    }
     IEnumerator CheckGPS()
     {
         while (true)
         {
             if (test)
             {
-                //Instantiate(player);
-                player.GetComponent<GPS_Move>().Activate();
+                if (placeObjects.Count > 0)
+                {
+                    foreach (var gm in placeObjects)
+                    {
+                        Destroy(gm);
+                    }
+                    placeObjects.Clear();
+                }
+                SetPlaceAgainActive(false);
+                canvasmanager.m_LocationText.text = "Adding Location Marker";
+                yield return new WaitForSeconds(3f);
+                var g = Instantiate(soundSource);
+                g.name = "sound source";
+                placeObjects.Add(g);
+                yield return new WaitForSeconds(0.1f);
+                GameObject p = Instantiate(player);
+                placeObjects.Add(p);
                 test = false;
+                canvasmanager.m_LocationText.text = $"Added Location Marker {Input.location.lastData.latitude} {Input.location.lastData.longitude}";
+                                      
+                yield return new WaitForSeconds(2f);
+                SetPlaceAgainActive(true);
             }
             GPSX = Input.location.lastData.latitude;
             GPSZ = Input.location.lastData.longitude;
-            m_LocationText.text = "Location: " + Input.location.lastData.latitude + " " +
-                                  Input.location.lastData.longitude;
+            canvasmanager.m_LocationText.text = $"Lon: {GPSZ} Lat: {GPSX}\n Accuracy: {Input.location.lastData.horizontalAccuracy}m";
+                                 
             //              " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
     public void StartGPS()
     {
+        // allow me to place again without force close app
         SetStartGPSButtonActive(false);
 
         StartCoroutine(CheckGPSSupport());
@@ -149,7 +168,7 @@ public class TestLocationService : MonoBehaviour
 
     void OnEnable()
     {
-
+        SetPlaceAgainActive(false);
         if (Permission.HasUserAuthorizedPermission(Permission.FineLocation))
         {
             // The user authorized use of the FineLocation.
@@ -160,6 +179,7 @@ public class TestLocationService : MonoBehaviour
             // Ask for permission or proceed without the functionality enabled.
             Permission.RequestUserPermission(Permission.FineLocation);
         }
+        
         //
 
     }
