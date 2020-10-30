@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GPS_Move : MonoBehaviour
 {
+    public GameObject audioObject;
     public double targetLocationLon;
     public double targetLocationLat;
 
@@ -84,6 +85,7 @@ public class GPS_Move : MonoBehaviour
         offsetZ = tS.GPSZ;
         ppX = MapTools.MercatorProjection.lonToX(offsetX - targetLocationLon);
         ppZ = MapTools.MercatorProjection.latToY(offsetZ - targetLocationLat);
+        audioObject.transform.position = new Vector3((float)ppX, transform.position.y, (float)ppZ);
         xT.text = ppX.ToString();
         yT.text = ppZ.ToString();
         engaged = true;
@@ -102,5 +104,11 @@ public class GPS_Move : MonoBehaviour
         updatePos();
         updateObjDistance();
         StartCoroutine(updateGPS());
+    }
+
+    public void refreshObjectLocation() 
+    {
+        updateObjDistance();
+        audioObject.transform.position = new Vector3((float)ppX, audioObject.transform.position.y, (float)ppZ);
     }
 }
