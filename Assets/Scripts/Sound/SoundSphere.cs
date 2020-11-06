@@ -22,6 +22,7 @@ public class SoundSphere : MonoBehaviour
             GetComponent<AudioSource>().maxDistance = radius / 2;
     }
 
+    //Debug for scene building
     //void OnDrawGizmos()
     //{
     //    Gizmos.color = Color.cyan;

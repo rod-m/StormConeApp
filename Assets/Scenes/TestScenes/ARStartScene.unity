@@ -544,9 +544,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e3369662d774eb3bb9d5d5367994329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LocationText: {fileID: 223974228}
-  m_StartGPSButton: {fileID: 149022782}
-  m_LogText: {fileID: 1892341434}
 --- !u!1 &223974226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,7 +1366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b2e7c22494424549bed4b3f481585dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToPlace: {fileID: 7016411721382644989, guid: c54a0e49709e44e19a3dc72c6b2904bf,
+  objectToPlace: {fileID: 8576590869747006550, guid: 523a56b6412e5bb4a96566f41d722492,
     type: 3}
   placementIndicator: {fileID: 1475554209}
 --- !u!4 &1405079139
