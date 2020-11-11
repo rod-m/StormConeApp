@@ -22,12 +22,13 @@ public class SoundSphere : MonoBehaviour
             GetComponent<AudioSource>().maxDistance = radius / 2;
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + radius/2, transform.position.y, transform.position.z));
-        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z + radius/2));
-        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x - radius/2, transform.position.y, transform.position.z));
-        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z - radius/2));
-    }
+    //Debug for scene building
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.cyan;
+    //    Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + radius/2, transform.position.y, transform.position.z));
+    //    Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z + radius/2));
+    //    Gizmos.DrawLine(transform.position, new Vector3(transform.position.x - radius/2, transform.position.y, transform.position.z));
+    //    Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z - radius/2));
+    //}
 }
