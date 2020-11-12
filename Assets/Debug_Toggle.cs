@@ -12,7 +12,6 @@ public class Debug_Toggle : MonoBehaviour
     void Start()
     {
         changePos = false;
-        toggleDebug();
     }
 
     private void offScreen() 

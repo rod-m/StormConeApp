@@ -5,11 +5,6 @@ using UnityEngine.UI;
 
 public class GPS_Move : MonoBehaviour
 {
-    public double debugX;
-    public double debugZ;
-    private bool compMode;
-
-    public GameObject audioObject;
     public double targetLocationLon;
     public double targetLocationLat;
 
@@ -35,7 +30,6 @@ public class GPS_Move : MonoBehaviour
     private void Start()
     {
         engaged = false;
-        compMode = false;
         //xT = GameObject.FindGameObjectWithTag("Ppx").GetComponent<Text>();
         //yT = GameObject.FindGameObjectWithTag("Ppy").GetComponent<Text>();
         //tS = GameObject.FindGameObjectWithTag("GameController").GetComponent<TestLocationService>();
@@ -45,12 +39,6 @@ public class GPS_Move : MonoBehaviour
     public void Activate()
     {
         
-        StartCoroutine(setOffset());
-    }
-
-    public void debugExp() 
-    {
-        compMode = true;
         StartCoroutine(setOffset());
     }
 
@@ -80,7 +68,7 @@ public class GPS_Move : MonoBehaviour
         }
         
         transform.position = new Vector3((float)x, 0, (float)z);
-        float f = Vector2.Distance(new Vector2((float)x, (float)z), new Vector2(audioObject.transform.position.x, audioObject.transform.position.z));
+        float f = Vector2.Distance(new Vector2((float)x, (float)z), new Vector2(0, 30));
         oD.text = f.ToString();
     }
 
@@ -92,19 +80,10 @@ public class GPS_Move : MonoBehaviour
     private IEnumerator setOffset() 
     {
         yield return new WaitForSeconds(3);
-        if (compMode)
-        {
-            offsetX = debugX;
-            offsetZ = debugZ;
-        }
-        else 
-        {
-            offsetX = tS.GPSX;
-            offsetZ = tS.GPSZ;
-        }
+        offsetX = tS.GPSX;
+        offsetZ = tS.GPSZ;
         ppX = MapTools.MercatorProjection.lonToX(offsetX - targetLocationLon);
         ppZ = MapTools.MercatorProjection.latToY(offsetZ - targetLocationLat);
-        audioObject.transform.position = new Vector3((float)ppX, transform.position.y, (float)ppZ);
         xT.text = ppX.ToString();
         yT.text = ppZ.ToString();
         engaged = true;
@@ -113,31 +92,15 @@ public class GPS_Move : MonoBehaviour
     private void updateObjDistance() {
         ppX = MapTools.MercatorProjection.lonToX(gpsX - targetLocationLon);
         ppZ = MapTools.MercatorProjection.latToY(gpsZ - targetLocationLat);
-        xT.text = ppX.ToString();
-        yT.text = ppZ.ToString();
     }
 
     private IEnumerator updateGPS() 
     {
         yield return new WaitForSeconds(1);
-        if (compMode)
-        {
-            gpsX = debugX;
-            gpsZ = debugZ;
-        }
-        else 
-        {
-            gpsX = tS.GPSX;
-            gpsZ = tS.GPSZ;
-        }
+        gpsX = tS.GPSX;
+        gpsZ = tS.GPSZ;
         updatePos();
-        //updateObjDistance();
-        StartCoroutine(updateGPS());
-    }
-
-    public void refreshObjectLocation() 
-    {
         updateObjDistance();
-        audioObject.transform.position = new Vector3((float)ppX, audioObject.transform.position.y, (float)ppZ);
+        StartCoroutine(updateGPS());
     }
 }
