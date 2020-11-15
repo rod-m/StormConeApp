@@ -1,48 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Mapbox.Unity.Map;
+using Mapbox.Unity.Utilities;
 using UnityEngine;
 
 public class MapCameraPanning : MonoBehaviour
 {
 
-    [HideInInspector]
-    public int speed = 4;
-    private Camera camera;
-    [HideInInspector] public float MINSCALE = 2.0F; 
-    [HideInInspector] public float MAXSCALE = 5.0F; 
-    [HideInInspector] public float minPinchSpeed = 5.0F; 
-    [HideInInspector] public float varianceInDistances = 5.0F; 
-    private float touchDelta = 0.0F; 
-    private Vector2 prevDist = new Vector2(0,0); 
-    private Vector2 curDist = new Vector2(0,0); 
-    private float speedTouch0 = 0.0F; 
-    private float speedTouch1 = 0.0F;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform interestAreaTransform;
+    private DistanceChecker distChecker;
+    private bool isSliding;
 
-    private AbstractMap map;
-    private float zoom = 10;
-    
     void Start()
     {
-        camera = FindObjectOfType<Camera>();
-        Input.multiTouchEnabled = true;
-        map = FindObjectOfType<AbstractMap>();
-        map.SetZoom(zoom);
-        
-        //Get park location
-        
-        //position the camera at the park coordinates
-        
-        //zoom map on park 
-        ZoomMap();
+        distChecker = FindObjectOfType<DistanceChecker>();
+        PointAt(playerTransform.transform.position.x, playerTransform.position.z);
     }
     
     void Update()
     {
-        PinchZoom();
+       // PinchZoom();
+       if (distChecker.CanSlide())
+       {
+           //slide camera
+           if (!distChecker.PlayerHasMoved())
+           {
+               SlideCamera();
+           }
+
+           PointAt(playerTransform.transform.position.x, playerTransform.position.z);
+           
+       }
+       else
+       {
+           PointAt(interestAreaTransform.position.x, interestAreaTransform.position.z);
+       }
     }
 
-    private void PinchZoom()
+    /*private void PinchZoom()
     {
         if (Input.touchCount == 2 && Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(1).phase == TouchPhase.Moved) 
         {
@@ -70,11 +66,20 @@ public class MapCameraPanning : MonoBehaviour
         {
             zoom++;
             map.SetZoom(zoom);
-            
         }
+    }*/
+
+    private void SlideCamera()
+    {
+     
+        //slide the camera left and right
     }
- 
-    //Salford parks origin: 53.488097, -2.270823
     
-    
+
+    private void PointAt(float targetX, float targetZ)
+    {
+        transform.position = new Vector3(targetX, 130, targetZ);
+    }
 }
+    
+

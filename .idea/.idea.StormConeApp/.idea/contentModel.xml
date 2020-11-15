@@ -7,13 +7,16 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="AreaGizmos.cs" t="Include" />
         <e p="ARFoundationSamples" t="Include">
           <e p="SupportChecker.cs" t="Include" />
         </e>
         <e p="Canvasmanager.cs" t="Include" />
+        <e p="Debug_Toggle.cs" t="Include" />
         <e p="Demo" t="Include">
           <e p="ARTapToPlaceObject.cs" t="Include" />
         </e>
+        <e p="DistanceChecker.cs" t="Include" />
         <e p="Mapbox" t="Include">
           <e p="Core" t="Include">
             <e p="cheap-ruler-cs" t="Include">
@@ -606,6 +609,7 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="GPS_Move.cs" t="Include" />
           <e p="GPSScripts" t="Include">
             <e p="DebugCanvaser.cs" t="Include" />
             <e p="GPS_Display.cs" t="Include" />
@@ -620,6 +624,11 @@
           <e p="ScreensManagement" t="Include">
             <e p="PageSlider.cs" t="Include" />
             <e p="SceneLoader.cs" t="Include" />
+          </e>
+          <e p="Sound" t="Include">
+            <e p="AudioCoordinator.cs" t="Include" />
+            <e p="AudioTriggerParent.cs" t="Include" />
+            <e p="SoundSphere.cs" t="Include" />
           </e>
           <e p="StartScreen.cs" t="Include" />
         </e>

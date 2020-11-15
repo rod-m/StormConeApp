@@ -79,7 +79,7 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 			{
 				wp[i] = _waypoints[i].GetGeoPosition(_map.CenterMercator, _map.WorldRelativeScale);
 			}
-			var _directionResource = new DirectionResource(wp, RoutingProfile.Driving);
+			var _directionResource = new DirectionResource(wp, RoutingProfile.Walking);
 			_directionResource.Steps = true;
 			_directions.Query(_directionResource, HandleDirectionsResponse);
 		}
@@ -137,7 +137,7 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 			{
 				_directionsGO.Destroy();
 			}
-			_directionsGO = new GameObject("direction waypoint " + " entity");
+			_directionsGO = new GameObject("directions");
 			var mesh = _directionsGO.AddComponent<MeshFilter>().mesh;
 			mesh.subMeshCount = data.Triangles.Count;
 
