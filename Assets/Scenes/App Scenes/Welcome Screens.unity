@@ -1871,7 +1871,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4b5197dbbba4dcf863d1c175034129c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfPanels: 3
+  _currentPanel: 1
   easing: 0.5
+  shouldMove: 1
 --- !u!224 &1535651864 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 42884404078555474, guid: 16bebaa628d33a54698b4248776d4ee5,
