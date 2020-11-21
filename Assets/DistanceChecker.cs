@@ -9,42 +9,49 @@ public class DistanceChecker : MonoBehaviour
     [SerializeField] private GameObject target;
     [SerializeField] private Camera camera;
 
+
+    private Vector3 cameraPosition;
+    
     private float distance;
-    private float prevDistance;
-    private bool canSlideCamera;
-    private bool hasMoved;
-    private bool shouldDisableNav;
+    
+    private bool userIsLeaving;
+    private bool reachedArea;
+
+    private bool userIsOutsideBounds;
     
     // Start is called before the first frame update
     void Start()
     {
-        canSlideCamera = true;
-        shouldDisableNav = false;
+        userIsLeaving = true;
+        reachedArea = false;
+
     }
 
     private void Update()
     {
-    
-        distance = Vector3.Distance(target.transform.position, this.transform.position);
-        prevDistance = distance;
+        cameraPosition = camera.transform.position;
 
-        if (Mathf.Abs(distance - prevDistance) > 0)
-        {
-            hasMoved = true;
-        }
-        canSlideCamera = true;
+        userIsLeaving = true;
+        
+        distance = Vector3.Distance(target.transform.position, this.transform.position);
         if (distance <= 25)
         {
-            Debug.Log("Entering the area...");
-            canSlideCamera = false;
+            userIsLeaving = false;
+            reachedArea = true;
+        }
+
+        if (distance > 30)
+        {
+            userIsLeaving = true;
+            reachedArea = false;
         }
         
     }
 
-    public bool CanSlide() => canSlideCamera;
+    public bool UserIsOutsideArea() => userIsLeaving;
 
-    public bool PlayerHasMoved() => hasMoved;
+    public bool UserIsInsideArea() => reachedArea;
 
-  
+
     
 }
