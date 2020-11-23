@@ -11,12 +11,16 @@
         <e p="ARFoundationSamples" t="Include">
           <e p="SupportChecker.cs" t="Include" />
         </e>
+        <e p="CameraBounds.cs" t="Include" />
         <e p="Canvasmanager.cs" t="Include" />
         <e p="Debug_Toggle.cs" t="Include" />
         <e p="Demo" t="Include">
           <e p="ARTapToPlaceObject.cs" t="Include" />
         </e>
         <e p="DistanceChecker.cs" t="Include" />
+        <e p="jons app icons.ico" t="Include">
+          <e p="browserconfig.xml" t="Include" />
+        </e>
         <e p="Mapbox" t="Include">
           <e p="Core" t="Include">
             <e p="cheap-ruler-cs" t="Include">
@@ -621,6 +625,7 @@
           <e p="MapCameraPanning.cs" t="Include" />
           <e p="MapSelector.cs" t="Include" />
           <e p="ParkInfoToggle.cs" t="Include" />
+          <e p="Point.cs" t="Include" />
           <e p="ScreensManagement" t="Include">
             <e p="PageSlider.cs" t="Include" />
             <e p="SceneLoader.cs" t="Include" />
@@ -631,6 +636,9 @@
             <e p="SoundSphere.cs" t="Include" />
           </e>
           <e p="StartScreen.cs" t="Include" />
+        </e>
+        <e p="Shaders" t="Include">
+          <e p="LinenShader.shader" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
@@ -660,6 +668,7 @@
             <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
+        <e p="VibrationController.cs" t="Include" />
       </e>
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
