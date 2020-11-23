@@ -10,7 +10,8 @@ public class VibrationController : MonoBehaviour
    
 
     void Start(){
-        Debug.Log("Vibrated!?");
+      
+        Vibration.Init();
         StartCoroutine(VibrateDuration());
 
     }
@@ -22,9 +23,9 @@ public class VibrationController : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         Handheld.Vibrate();
         yield return new WaitForSeconds(1.0f);
-        Handheld.Vibrate();
-        yield return new WaitForSeconds(1.0f);
-        Handheld.Vibrate();
+        Vibration.Vibrate();
+        Debug.Log("Vibrated!?");
+      
     }
 
 
