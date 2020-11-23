@@ -11,7 +11,7 @@ public class VibrationController : MonoBehaviour
 
     void Start(){
       
-        Vibration.Init();
+     
         StartCoroutine(VibrateDuration());
 
     }
@@ -19,13 +19,11 @@ public class VibrationController : MonoBehaviour
     public IEnumerator VibrateDuration()
 
     {
-
-        yield return new WaitForSeconds(1.0f);
         Handheld.Vibrate();
-        yield return new WaitForSeconds(1.0f);
-        Vibration.Vibrate();
-        Debug.Log("Vibrated!?");
-      
+        yield return new WaitForSeconds(0.5f);
+        Handheld.Vibrate();
+        yield return new WaitForSeconds(0.5f);
+        Handheld.Vibrate();
     }
 
 
