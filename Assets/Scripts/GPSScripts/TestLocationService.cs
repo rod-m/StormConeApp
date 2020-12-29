@@ -1,166 +1,168 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.UI;
 
-public class TestLocationService : MonoBehaviour
+namespace GPSScripts
 {
-    [SerializeField]
-    Text m_LocationText;
-    [SerializeField]
-    Button m_StartGPSButton;
-
-
-    public float GPSX;
-    public float GPSZ;
-
-    public bool test;
-    public GameObject player;
-
-    private void Start()
+    public class TestLocationService : MonoBehaviour
     {
-        GPSX = 0;
-        GPSZ = 0;
-    }
+        [SerializeField]
+        Text m_LocationText;
+        [SerializeField]
+        Button m_StartGPSButton;
 
 
-    public Button startGPSButton
-    {
-        get { return m_StartGPSButton; }
-        set { m_StartGPSButton = value; }
-    }
-    void SetStartGPSButtonActive(bool active)
-    {
-        if (m_StartGPSButton != null)
-            m_StartGPSButton.gameObject.SetActive(active);
-    }
-    public Text locationText
-    {
-        get { return m_LocationText; }
-        set { m_LocationText = value; }
-    }
+        public float GPSX;
+        public float GPSZ;
 
-    [SerializeField]
-    Text m_LogText;
+        public bool test;
+        public GameObject player;
 
-    public Text logText
-    {
-        get { return m_LogText; }
-        set { m_LogText = value; }
-    }
-
-    void Log(string message)
-    {
-        m_LogText.text += $"{message}\n";
-    }
-
-    IEnumerator CheckGPSSupport()
-    {
-        m_LogText.text = "Starting GPS";
-        // First, check if user has location service enabled
-        if (!Input.location.isEnabledByUser)
+        private void Start()
         {
-            m_LogText.text = "*** GPS Not Enabled By USER! ***";
-
-            yield return new WaitForSeconds(3);
-            m_LocationText.text = "NO GPS";
-            m_LogText.text = "";
-
-            yield break;
+            GPSX = 0;
+            GPSZ = 0;
         }
 
 
-        // Start service before querying location
-        Input.location.Start(1, 1);
-
-        // Wait until service initializes
-        int maxWait = 20;
-        while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
+        public Button startGPSButton
         {
-            Debug.Log("Waiting " + maxWait);
-            m_LocationText.text = "Waiting... " + maxWait;
-            yield return new WaitForSeconds(1);
-            maxWait--;
+            get { return m_StartGPSButton; }
+            set { m_StartGPSButton = value; }
+        }
+        void SetStartGPSButtonActive(bool active)
+        {
+            if (m_StartGPSButton != null)
+                m_StartGPSButton.gameObject.SetActive(active);
+        }
+        public Text locationText
+        {
+            get { return m_LocationText; }
+            set { m_LocationText = value; }
         }
 
-        // Service didn't initialize in 20 seconds
-        if (maxWait < 1)
+        [SerializeField]
+        Text m_LogText;
+
+        public Text logText
         {
-            Log("\nTimed out");
-            m_LocationText.text = "GSP Timeout 20s!";
-            yield break;
+            get { return m_LogText; }
+            set { m_LogText = value; }
         }
 
-        // Connection has failed
-        if (Input.location.status == LocationServiceStatus.Failed)
+        void Log(string message)
         {
-            Log("\nUnable to determine device location");
-            m_LocationText.text = "Unable to determine device location";
-            yield break;
-        }
-        else
-        {
-            // Access granted and location value could be retrieved
-            Log("\nLocation: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp);
+            m_LogText.text += $"{message}\n";
         }
 
-        // Stop service if there is no need to query location updates continuously
-
-        // Input.location.Stop();
-        StartCoroutine(CheckGPS());
-    }
-
-    IEnumerator CheckGPS()
-    {
-        while (true)
+        IEnumerator CheckGPSSupport()
         {
-            if (test)
+            m_LogText.text = "Starting GPS";
+            // First, check if user has location service enabled
+            if (!Input.location.isEnabledByUser)
             {
-                //Instantiate(player);
-                player.GetComponent<GPS_Move>().Activate();
-                test = false;
+                m_LogText.text = "*** GPS Not Enabled By USER! ***";
+
+                yield return new WaitForSeconds(3);
+                m_LocationText.text = "NO GPS";
+                m_LogText.text = "";
+
+                yield break;
             }
-            GPSX = Input.location.lastData.latitude;
-            GPSZ = Input.location.lastData.longitude;
-            m_LocationText.text = "Location: " + Input.location.lastData.latitude + " " +
-                                  Input.location.lastData.longitude;
-            //              " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy;
-            yield return new WaitForSeconds(1);
+
+
+            // Start service before querying location
+            Input.location.Start(1, 1);
+
+            // Wait until service initializes
+            int maxWait = 20;
+            while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
+            {
+                Debug.Log("Waiting " + maxWait);
+                m_LocationText.text = "Waiting... " + maxWait;
+                yield return new WaitForSeconds(1);
+                maxWait--;
+            }
+
+            // Service didn't initialize in 20 seconds
+            if (maxWait < 1)
+            {
+                Log("\nTimed out");
+                m_LocationText.text = "GSP Timeout 20s!";
+                yield break;
+            }
+
+            // Connection has failed
+            if (Input.location.status == LocationServiceStatus.Failed)
+            {
+                Log("\nUnable to determine device location");
+                m_LocationText.text = "Unable to determine device location";
+                yield break;
+            }
+            else
+            {
+                // Access granted and location value could be retrieved
+                Log("\nLocation: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp);
+            }
+
+            // Stop service if there is no need to query location updates continuously
+
+            // Input.location.Stop();
+            StartCoroutine(CheckGPS());
         }
-    }
 
-    public void StartGPS()
-    {
-        SetStartGPSButtonActive(false);
-
-        StartCoroutine(CheckGPSSupport());
-    }
-
-    public void UpdateGPS() 
-    {
-        CheckGPS();
-    }
-    public void StopGPS()
-    {
-        SetStartGPSButtonActive(true);
-        StopCoroutine(CheckGPSSupport());
-    }
-
-    void OnEnable()
-    {
-
-        if (Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+        IEnumerator CheckGPS()
         {
-            // The user authorized use of the FineLocation.
+            while (true)
+            {
+                if (test)
+                {
+                    //Instantiate(player);
+                    player.GetComponent<GPS_Move>().Activate();
+                    test = false;
+                }
+                GPSX = Input.location.lastData.latitude;
+                GPSZ = Input.location.lastData.longitude;
+                m_LocationText.text = "Location: " + Input.location.lastData.latitude + " " +
+                                      Input.location.lastData.longitude;
+                //              " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy;
+                yield return new WaitForSeconds(1);
+            }
         }
-        else
-        {
-            // We do not have permission to use the FineLocation.
-            // Ask for permission or proceed without the functionality enabled.
-            Permission.RequestUserPermission(Permission.FineLocation);
-        }
-        //
 
+        public void StartGPS()
+        {
+            SetStartGPSButtonActive(false);
+
+            StartCoroutine(CheckGPSSupport());
+        }
+
+        public void UpdateGPS() 
+        {
+            CheckGPS();
+        }
+        public void StopGPS()
+        {
+            SetStartGPSButtonActive(true);
+            StopCoroutine(CheckGPSSupport());
+        }
+
+        void OnEnable()
+        {
+
+            if (Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+            {
+                // The user authorized use of the FineLocation.
+            }
+            else
+            {
+                // We do not have permission to use the FineLocation.
+                // Ask for permission or proceed without the functionality enabled.
+                Permission.RequestUserPermission(Permission.FineLocation);
+            }
+            //
+
+        }
     }
 }

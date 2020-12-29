@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
+using GPSScripts;
 using Mapbox.Unity.Map;
 using Mapbox.Unity.MeshGeneration.Factories;
 using Mapbox.Unity.Utilities;
@@ -16,6 +16,7 @@ public class MapCameraPanning : MonoBehaviour
     [SerializeField] private GameObject leavingPanel;
     [SerializeField] private GameObject CenterCameraToggle;
     private DistanceChecker distChecker;
+    
     private bool isSliding;
     private float speed = 0.025f;
 

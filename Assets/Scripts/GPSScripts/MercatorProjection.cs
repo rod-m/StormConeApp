@@ -5,7 +5,7 @@
 
 using System;
 
-namespace MapTools
+namespace GPSScripts
 {
     public static class MercatorProjection
     {
