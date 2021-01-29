@@ -43,7 +43,7 @@ namespace GPSScripts
                 userIsLeaving = true;
                 reachedArea = false;
             }
-        
+
         }
 
         public bool UserIsOutsideArea() => userIsLeaving;
